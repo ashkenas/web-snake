@@ -2,7 +2,7 @@ const arrayOfLength = (n) => Array.from(new Array(n));
 
 class PieceType {
     static Empty = Symbol('empty');
-    static Snake = Symbol('snack');
+    static Snake = Symbol('snake');
     static Food = Symbol('food');
     static toColor = (type) => {
         switch (type) {
