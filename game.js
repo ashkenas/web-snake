@@ -81,6 +81,7 @@ class Game {
         }
         this.snake(this.x, this.y, true);
         this.refresh();
+        this.start();
     }
 
     refresh() {
@@ -97,21 +98,23 @@ class Game {
         if (xDir === this.direction[0] * -1 && yDir === this.direction[1] * -1)
             return;
         this.direction = [xDir, yDir];
+        this.pause();
+        this.tick();
     }
 
     start() {
         if (!this.over)
-            this.interval = setInterval(() => this.tick(), 1000 / this.fps);
+            this.nextTick = setTimeout(() => this.tick(), 1000 / this.fps);
     }
 
     pause() {
-        if (this.interval !== null)
-            clearInterval(this.interval);
-        this.interval = null;
+        if (this.nextTick !== null)
+            clearTimeout(this.nextTick);
+        this.nextTick = null;
     }
 
     toggle() {
-        if (!this.over && this.interval === null) this.start();
+        if (!this.over && this.nextTick === null) this.start();
         else this.pause();
     }
 
